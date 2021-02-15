@@ -1,0 +1,701 @@
+\documentclass[a4paper,12pt,fleqn]{article}
+\author{Izaak \& Alastair}
+\title{ANALYFIS AND TOFOLOGY - EXAMPLES 3}
+
+\usepackage{mysty}
+\usepackage{mymaths}
+
+% Embed source files into PDF in case of loss. You can view or extract the
+% source files by doing `pdfdetach -list <file.pdf>` or
+% `pdfdetach -saveall <file.pdf>`, using pdfdetach from poppler, or some other
+% suitable method.
+\usepackage[main]{embedall}
+\embedfile{mymaths.sty}
+\embedfile{mysty.sty}
+
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+ \item
+  Firstly, note that since path-connectedness implies connectedness, it suffices
+  in each case to either prove path connectedness, or disconnectedness.
+
+  We write ``\(X\)'' to denote each respective space while we are talking about
+  it. We will also write \(x \pcon y\) to denote the equivalence relation
+  ``there exists a path from \(x\) to \(y\)''.
+  \begin{enumerate}[label=(\roman*)]
+   \item
+    \(X\) is disconnected. Let \(U = D_1(-1, 0)\) and \(V = D_1(1, 0)\). Then
+    \(U\) and \(V\) are clearly both open, disjoint, non-empty, and
+    \(X = U \union V\) by definition.
+   \item
+    \(X\) is path-connected. Indeed, in \(\R^n\), if \(\vec y\) is any point in
+    a ball\footnote{%
+     Open or closed, or in fact any set lying in between the open and closed
+     balls of radius \(r\) around \(\vec x\).
+    } centred at \(\vec x\) - call the ball \(B\) of radius \(r\) - then there
+    is a path from \(\vec y\) to \(\vec x\), given by the line
+    \(\vec \gamma: t \mapsto \vec y + t(\vec x - \vec y)\).
+    \begin{itemize}
+     \item
+      \(\vec \gamma\) is continuous eg because
+      each component \(q_i \compose \vec \gamma: t \mapsto y_i + t(x_i - y_i)\)
+      is continuous.
+
+      Alternatively, we can directly show that \(\vec \gamma\) is
+      \(\norm{\vec x - \vec y}\)-Lipschitz in the Euclidean metric.
+     \item
+      We also need to show that \(\vec \gamma\) is well-defined.
+      \(\vec \gamma(0) = \vec y \in B\) by choice of \(\vec y\). If
+      \(0 < t \le 1\), then
+      \(d(\vec \gamma(t), \vec x)
+        = (1 - t)\norm{\vec x - \vec y}
+        < \norm{\vec x - \vec y}
+        \le r\).
+      It follows that \(\vec \gamma(t) \in B\).
+    \end{itemize}
+    Lastly observe that in \(X\), the points \((-1, 0)\) and \((1 ,0)\) are
+    connected by the line \(\vec \gamma: t \mapsto (-1, 0) + t(2, 0)\). Again,
+    this is clearly continuous, and for \(0 \le t < \tfrac 12\), we have
+    \(\vec \gamma(t) \in D_1(-1, 0)\), and for \(\tfrac 12 \le t \le 1\), we
+    have \(\vec \gamma(t) \in B_1(-1, 0)\).
+
+    \(\pcon\) is an equivalence relation, so by the above, \(X\) is
+    path-connected:
+
+    Since there is a path from each \(\vec x \in X\) to \((-1, 0)\) or
+    \((1, 0)\), so \(\vec x \pcon (1, 0)\), by transitivity and symmetry, all
+    points are path-connected to each other.
+   \item
+    Let \((x, y) \in X\). We show that \((x, y) \pcon (0, 0)\).
+
+    Define the path \(\vec \gamma: t \mapsto (1 - t)(x, y)\). Clearly
+    \(\vec \gamma\) is continuous.
+    \begin{itemize}
+     \item
+      If \(x = 0\), then \((1 - t)x = 0\) for all \(t \in \intcc{0, 1}\), so
+      \(\vec \gamma\) is well-defined.
+     \item
+      If \(x \ne 0\) and \(y / x \in \Q\), then for \(0 \le t < 1\), we have
+      \([(1 - t)y] / [(1 - t)x] = y / x \in \Q\), and when \(t = 1\),
+      \((1 - t)x = 0\). So \(\vec \gamma\) is well-defined.
+    \end{itemize}
+    By the same equivalence relation argument as before, \(X\) is
+    path-connected.
+   \item
+    \(X\) is disconnected. Let
+    \begin{align*}
+     U &= \set{(x, y) : x > \sqrt 2 y} \subset \R^2 \\
+     V &= \set{(x, y) : x < \sqrt 2 y} \subset \R^2
+    \end{align*}
+    Defining the continuous function \(f(x, y) = \sqrt 2 y - x\), it is clear
+    that \(U = f^{-1}(-\infty, 0)\) and \(V = f^{-1}(0, \infty)\) are open.
+
+    Furthermore, \((U \union V)^C\) does not intersect with \(X\),
+    since if \((x, y) \in (U \union V)^C\), then \(\sqrt 2 y = x\), so if
+    \(x = 0\), then \(y = 0\), so \((x, y) \notin X\). But if
+    \(x \ne 0\), then \(y / x = \tfrac 12 \sqrt 2 \notin \Q\), so
+    \((x, y) \notin X\).
+
+    So \(X \subset U \union V\). But clearly \(U \intersect V = \emptyset\), so
+    \(U \intersect X\) and \(V \intersect X\) disconnect \(X\).
+  \end{enumerate}
+ \item
+  Let \(T \subset S\). We show that \(f^{-1}(T)\) is open in \(X\).
+
+  Indeed, let \(x \in f^{-1}(T)\). Let \(U\) be a neighbourhood of \(X\) on
+  which \(f\) is constant. Then for any \(u \in U\),
+  \(f(u) = f(x) \in T\), so \(u \in f^{-1}(T)\), ie \(U \subset f^{-1}(T)\).
+  This proves \(f^{-1}(T)\) is open.
+
+  Now suppose \(f\) is not constant, ie there are distinct \(x_1\) and \(x_1\)
+  such that \(f(x_1) \ne f(x_2)\). Let \(T_1 = \set{x_1}\), and
+  \(T_2 = S \setminus \set{x_1}\). Let \(U = f^{-1}(T_1)\) and
+  \(V = f^{-1}(T_2)\).
+
+  Then \(x_1 \in U\) and \(x_2 \in V\), so both are non-empty. By the above,
+  they are open. We have
+  \(U \union V = f^{-1}(T_1 \union T_2) = f^{-1}(S) = X\), and
+  \(U \intersect V = f^{-1}(T_1 \intersect T_2) = f^{-1}(\emptyset) =
+  \emptyset\).
+
+  So \(U\) and \(V\) disconnect \(X\), which is a contradiction.
+ \item
+  Let \(X\) and \(Y\) be tofological spaces, and let \(f: X \to Y\) be a
+  homeomorphism. Write \(\mathcal C(X)\) and \(\mathcal C(Y)\) for the
+  respective sets of connected components. We claim that
+  \begin{alignat*}2
+   f&:& \mathcal C(X) &{}\to \mathcal C(Y) \\
+   &&S &{}\mapsto f(S) \\
+   &&f^{-1}(S') &{}\mapsfrom S'
+  \end{alignat*}
+  is a bijection.
+
+  Indeed, let \(S \subset X\) be connected. Since \(f\) is continuous and \(S\)
+  is connected, \(f(S)\) is connected. Now suppose \(f(S)\) is not a maximal
+  connected set - ie, there is some connected \(Y' \subset Y\) with
+  \(f(S) \subsetneq Y'\). Since \(f^{-1}\) is continuous, \(f^{-1}(Y')\) is
+  connected, and since \(f\) is a bijection, \(S \subsetneq f^{-1}(Y')\). So
+  \(S\) is not a maximal connected set, which is a contradiction. So \(f(S)\)
+  was a connected component.
+
+  That \(f^{-1}\) also sends connected components to connected
+  components follows from the fact that \(f^{-1}\) is also a homeomorphism.
+
+  It follows that \(\card{\mathcal C(X)} = \card{\mathcal C(Y)}\).
+
+  A cheeky optimisation here is to use the fact that \(\intcc{0, 1}\) is
+  compact, but the other aren't compact. We give a more principled argument.
+
+  For a tofological space, define \(N_1(X)\) to be the set
+  \(\set{x \in X : \text{\(X \setminus \set{x}\) is connected}}\).
+
+  The size of this set is well-defined up to homeomorphism: if
+  \(f: X \to Y\) is a homeomorphism, then
+  \(f\restrict_{X \setminus \set x}:
+    X \setminus \set x \to Y \setminus \set{f(x)}\) is a homeomorphism, so
+  particularly, if \(x \in N_1(X)\), then \(f(x) \in N_1(Y)\). It follows
+  that \(x \in N_1(X) \iff f(x) \in N_1(Y)\), ie \(f\) restricts to a
+  bijection \(f\restrict_{N_1(X)}: N_1(X) \to N_1(Y)\).
+
+  But clearly \(N_1\intoo{0, 1} = \emptyset\) and
+  \(N_1\intco{0, 1} = \set 0\) and \(N_1\intcc{0, 1} = \set{0, 1}\) all have a
+  different number of elements. So these three are not homeomorphic.
+
+  There is another invariant we could have used. Namely, it is possible to
+  remove two points from \(\intcc{0, 1}\) without disconnecting it, but if we
+  remove two points \(x\) and \(y\) from \(X = \intco{0, 1}\) or
+  \(X = \intoo{0, 1}\), then we must have either \(x\) or \(y\) being nonzero -
+  say \(0 < x < 1\), without loss of generality.
+  Then \(U = (-\infty, x) \intersect (X \setminus {x, y})\) and
+  \(V = (x, \infty) \intersect (X \setminus{x, y})\)
+  disconnect \(X \setminus \set{x, y}\).
+
+  Similarly, we can remove a point from \(\intco{0, 1}\) without disconnecting
+  it, but this cannot be done for \(\intoo{0, 1}\).
+
+  For \(\mathsf A\) and \(\mathsf H\), a nice invariant to use is the fact that
+  it is possible to remove a single point from \(\mathsf H\) that disconnects it
+  into three components, but there is no such point in \(\mathsf A\).
+
+  Alternatively, \(\abs{N_1(\mathsf H)} = 4\) - it just consists of the
+  end-points of each line. But \(N_1(\mathsf A)\) has at least continuum many
+  elements, namely at least each point lying inside the loop in the middle of
+  \(\mathsf A\).
+
+  A slightly messier alternative is that fact that is is possible to remove
+  \(4\) points from \(\mathsf H\) without disconnecting it, but this cannot be
+  done for \(\mathsf A\). This one is fairly obvious if you think about it but
+  it doesn't feel very satisfying to me.
+
+  \begin{question}
+   Can we characterise the end-points of each line tofologically, in an
+   elementary-ish way? This would lead to another nice proof if that's possible,
+   since \(\mathsf A\) only has \(2\) such points, but \(\mathsf H\) has \(4\).
+  \end{question}
+ \item
+  Firstly, we claim that \(C_n = \set{1/n} \times \intcc{0, 1}\) is a connected
+  component. Clearly it is connected. Moreover, let
+  \(U_n
+     = \bracks[\big]{\intoo[\big]{
+        \tfrac 12(\tfrac 1n + \tfrac 1{n + 1}),
+        \tfrac 12(\tfrac 1n + \tfrac 1{n - 1})}
+     \times \intoo{-1, 2}} \intersect X\),
+  where we take \(1 / 0 = \infty\). Let
+  \(V_n
+     = X \setminus \bracks[\big]{\intcc{
+        \tfrac 12(\tfrac 1n + \tfrac 1{n + 1}),
+        \tfrac 12(\tfrac 1n + \tfrac 1{n - 1})}
+     \times \intcc{-1, 2}} \intersect X\).
+  Then clearly \(X = U_n \union V_n\) is a union of disjoint non-empty open
+  sets. In fact, \(U_n = C_n\). Suppose that \(C_n\) is not a maximal
+  connected set, ie there is some connected \(C'\) with \(C_n \subsetneq C'\).
+  Then \(U_n\) and \(C' \intersect V_n\) disconnect \(C'\), which is a
+  contradiction. So \(C_n\) is a connected component.
+
+  Lastly, \(\set{(0, 0)}\) and \(\set{(0, 1)}\) must be separate connected
+  components, since \(\set{(0, 0), (0, 1)}\) is disconnected.
+
+  Now let \(x = (0, 0)\) and \(y = (0, 1)\). Suppose \(U\) and \(V\) disconnect
+  \(X\), and \(x \in U\), and \(y \in V\). Note that if \(U\) intersects with
+  some connected component \(C\), then \(U\) must contain all of \(C\)
+  (otherwise \(U \intersect C\) and \(V \intersect C\) would disconnect \(C\)).
+
+  By openness of \(U\) and \(V\), choose \(\delta_1, \delta_2 > 0\) such that
+  \(D_{\delta_1}^X(x) \subset U\) and \(D_{\delta_2}^X(y) \subset V\).
+
+  Choose \(N > [\min \set{\delta_1, \delta_2}]^{-1}\). Then \((1/N, 0) \in U\),
+  so \(U\) intersects with \(C_N\), so \(C_N \subset U\).
+  But also \((1/N, 1) \in V\), so \(C_N \subset V\). So
+  \(C_N \subset U \intersect V\), contradicting disjointness.
+ \item
+  We argue by Heine-Borel.
+
+  Firstly note that \(\norm{\cdot}: A \to \R\) is continuous, so it must be
+  bounded. So \(A\) is bounded.
+
+  Now suppose \(A\) is not closed. Let \(a \in \cl(A) \setminus A\). Then define
+  \begin{align*}
+   f: A &\to \R \\
+   x &\mapsto 1 / d(x, a)
+  \end{align*}
+  Since \(x \mapsto d(x, a)\) is continuous and positive
+  (eg by sheet 2, question 5: \(d(x, a) = d(x, \set a)\)), and
+  \(x \mapsto 1 / x\) is a continuous function on the positive reals, \(f\) is
+  continuous. So \(f\) must be bounded.
+
+  But also by sheet 2 question 5, there is some sequence \((x_n)\) in \(A\) with
+  \(x_n \to a\), so \(d(x_n, a) \to 0\), so \(f(x_n) \to \infty\), contradicting
+  boundedness. So \(A\) is closed, and therefore compact.
+ \item
+  WLOG we will take \(A\) to be bounded. Particularly \(A\) is compact, so
+  sequentially compact.
+
+  Suppose \((a_n + b_n)\) is a sequence in \(A + B\), with \(a_n + b_n \to x\)
+  in \(\R^n\).
+
+  Let \((a_{k_n})\) be a convergent subsequence of \((a_n)\). Say
+  \(a_{k_n} \to a\) in \(A\).
+
+  Then \(b_{k_n} = a_{k_n} + b_{k_n} - a_{k_n} \to x - a\) in \(\R^n\). But
+  \(B\) is closed, so \(x - a \in B\).
+
+  So \(x = a + (x - a) \in A + B\), and \(A + B\) must be closed.
+
+  For our counterexample, let \(A = \N\), and
+  \(B = \set{-n + 1 / (n + 1) : n \in \N}\) (here we take \(0 \notin \N\)).
+  Then \(1 / (n + 1) = n + -n + 1 / (n + 1) \in A + B\) for any \(n\), but since
+  \(n + 1 \ge 2\), we have \(0 < 1 / (n + 1) \le \tfrac 12\), so
+  \(B \intersect \Z = \emptyset\) and particularly \(0 \notin A + B\).
+
+  To show that \(A\) and \(B\) are closed, we can simply write down their
+  complements:
+  \begin{align*}
+   \R \setminus A
+    &= (-\infty, 1) \union (1, 2) \union (2, 3) \union \dotsb \\
+   \R \setminus B
+    &= (-\tfrac 12, \infty) \union (-\tfrac 53, -\tfrac 12)
+       \union (-\tfrac{11}{12}, -\tfrac 53) \union \dotsb
+  \end{align*}
+  both of which are clearly open. This can be extended to any diverging monotone
+  sequence in \(\R\), or more generally still, any sequence having no convergent
+  subsequence.
+
+  Alternatively, we could argue that if \(n \ne m\), then
+  \begin{align*}
+   \abs[\big]{-n + \tfrac 1{n + 1} + m - \tfrac 1{m + 1}}
+    &\ge \abs{m - n} - \abs[\big]{\tfrac 1{n + 1} - \tfrac 1{m + 1}} \\
+    &\ge \abs{m - n} - \tfrac 1{n + 1} - \tfrac 1{m + 1} \\
+    &\ge 1 - \tfrac 12 - \tfrac 13 \\
+    &= \tfrac 16
+  \end{align*}
+  and \(\abs{n - m} \ge 1\), so any convergent sequence in \(A\) (or resp.
+  \(B\)) must be eventually constant.
+ \item
+  Define the spherical polar parametrisation
+  \begin{alignat*}2
+   f&:& Q &\to S^2 \\
+   && (s, t) &\mapsto
+   \begin{pmatrix}
+    \cos 2 \pi s \sin \pi t \\
+    \sin 2 \pi s \sin \pi t \\
+    \cos \pi t
+   \end{pmatrix},
+  \end{alignat*}
+  and establish that \(f\) is well-defined and fully respects \(R\), \(f\) is
+  surjective, and \(f\) is continuous. Extract a continuous bijection
+  \(\tilde f: Q/R \to S^2\), which must be a homeomorphism by the tofological
+  inverse function theorem. The algebra is provided in the appendix.
+  % or is it dummy
+ \item
+  Suppose \(X\) is a sequentially compact tofological space, and \(f: X \to \R\)
+  is continuous. Suppose \(f\) is unbounded. Then we can choose an \(x_n\) with
+  \(\abs{x_n} \ge n\), for all \(n \in \N\). Then no subsequence of \(f(x_n)\)
+  is bounded, so no subsequence converges. This contradicts sequential
+  compactness of \(X\), since if \(x_{k_n}\) is a convergent subsequence, then
+  \(f(x_{k_n})\) must also converge.
+
+  Now we prove \(f\) attains its upper bound. Let \(M = \sup_X f\).
+  For each \(n \in \N\), pick an \(x_n\) such that
+  \(f(x_n) \in \intcc{M - \tfrac 1n, M}\) (this is possible as otherwise \(M\)
+  would not be the supremum).
+
+  Take a convergent subsequence \(x_{k_n} \to x\) in \(X\).
+  Then \(f(x_{k_n}) \to f(x)\). But by construction, we have
+  \(\abs{f(x_{k_n}) - M} \le 1/k_n \to 0\), so \(f(x_{k_n}) \to M\).
+  So \(f(x) = M\). The argument to show that \(f\) attains its infimum is
+  similar.
+
+  Now suppose \((M, d)\) is a compact metric space, \((M', d')\) is any metric
+  space, and let \(f: M \to M'\) be continuous. Fix an \(\epsilon > 0\). For
+  each \(x \in M\), choose \(\delta_x\) such that
+  \(d(x, y) < \delta_x \implies d'(f(x), f(y)) < \tfrac 12 \epsilon\).
+
+  Let \(\mathcal U = \set{D_{\delta_x / 2}(x) : x \in M}\). Clearly
+  \(\mathcal U\) is an open cover of \(M\), so pick a finite subcover
+  \(\mathcal V
+    = \set{D_{\delta_{x_1} / 2}(x_1), \dotsc, D_{\delta_{x_n} / 2}(x_n)}\).
+  Let \(\delta = \min_{1 \le i \le n} \tfrac 12 \delta_{x_i}\).
+
+  Then suppose \(x, y \in M\) with \(d(x, y) < \delta\).
+  Since \(\mathcal V\) covers \(M\), we can find an \(x_i\) such that
+  \(d(x, x_i) < \tfrac 12 \delta_{x_i}\). Then
+  \(d(y, x_i)
+    \le d(y, x) + d(x, x_i)
+    < \tfrac 12 \delta_{x_i} + \delta
+    < \delta_{x_i}\).
+  So both \(x\) and \(y\) lie in \(D_{\delta_{x_i}}(x_i)\), and we can apply the
+  triangle inequality one last time:
+  \(d(f(x), f(y))
+    \le d(f(x), f(x_i)) + d(f(x_i), f(y))
+    < \tfrac 12 \epsilon + \tfrac 12 \epsilon
+    = \epsilon\).
+  So \(f\) is uniformly continuous!
+  \begin{remark}
+   The really crucial step here was to make our cover \(\mathcal U\) not consist
+   of full \(\delta_x\)-balls, but of \(\tfrac 12 \delta_x\)-balls. This meant
+   that when we had our arbitrary close-together \(x\) and \(y\) later on, we
+   wouldn't run into the problem of having \(x\) and \(y\) being very close
+   together but still in different \(\delta_x\)-balls.
+
+   Aside from that, it was a fairly standard two-epsilon compactness proof.
+   It's a nice example of how compactness lets us turn local properties into
+   global properties by reducing to a finite number of areas.
+  \end{remark}
+  \begin{question}
+   Is there some sort of clever way to do this by recycling a previous
+   compactness result? Maybe writing down a clever continuous function involving
+   \(d\)?
+  \end{question}
+ \item
+  \begin{enumerate}[label=(\alph*)]
+   \item
+    Let \(\equivr\) be an equivalence relation on a set \(S\), and \(f: T \to S\)
+    be a function. Then
+    \(R = \set{(t_1, t_2) \in T \times T : f(t_1) \equivr f(t_2)}\) is an
+    equivalence relation on \(T\), since
+    \begin{itemize}
+     \item
+      \(f(t) \equivr f(t)\) for all \(t\), by reflexivity of \(\equivr\).
+     \item
+      If \(f(t_1) \equivr f(t_2)\), then \(f(t_2) \equivr f(t_1)\) by symmetry of
+      \(\equivr\).
+     \item
+      If \(f(t_1) \equivr f(t_2)\) and \(f(t_2) \equivr f(t_3)\),
+      then \(f(t_1) \equivr f(t_3)\), by transitivity of \(\equivr\).
+    \end{itemize}
+    It follows that the given \(R\) is an equivalence relation on \(X\).
+
+    Now, deviating from the question's notation, let \(q: X \to X/R\),
+    \(q_1: X \to X / R_1\) and \(q_2: X / R_1 \to (X / R_1) / R_2\) be the
+    quotient maps. Note that
+    \begin{alignat*}2
+     && (q_2 \compose q_1)(x) &{}= (q_2 \compose q_1)(y) \\
+     &\iff{}& q_2(q_1(x)) &{}= q_2(q_1(y)) \\
+     &\iff{}& (q_1(x), q_1(y)) &{}\in R_2 \\
+     &\iff{}& (x, y) &{}\in R
+    \end{alignat*}
+    So \(q_2 \compose q_1\) fully respects \(R\). Clearly \(q_2 \compose q_1\) is
+    continuous, and as a composition of surjective functions it is also
+    surjective.
+
+    So there is a continuous bijection \(f: X / R \to (X / R_1) / R_2\), such that
+    \(f \compose q = q_2 \compose q_1\).
+
+    Now note that the function \(q: X \to X/R\) respects the relation \(R_1\),
+    inducing a continuous surjection \(g: X/R_1 \to X/R\), with
+    \(g \compose q_1 = q\). Now \(g\) fully respects \(R_2\), since
+    \begin{alignat*}2
+     && g([x]_{R_1}) &= g([y]_{R_1}) \\
+     &\iff{}& g(q_1(x)) &= g(q_1(y)) \\
+     &\iff{}& q(x) &= q(y) \\
+     &\iff{}& (x, y) &\in R \\
+     &\iff{}& ([x], [y]) &\in R_2
+    \end{alignat*}
+    so we obtain a continuous bijection \(\tilde g: (X / R_1) / R_2 \to X / R\)
+    such that \(\tilde g \compose q_2 = g\).
+
+    Now observe that
+    \(\tilde g(f([x]_R))
+      = \tilde g(q_2(q_1(x)))
+      = g(q_1(x))
+      = q(x))
+      = [x]\), and also\footnote{%
+     Strictly, since we already know \(f\) is a bijection, we could have skipped
+     the second calculation.
+    } that
+    \(f(\tilde g([[x]_{R_1}]_{R_2}))
+      = f(\tilde g(q_2(q_1(x))))
+      = f(g(q_1(x)))
+      = f(q(x)))
+      = q_2(q_1(x))
+      = [[x]_{R_1}]_{R_2}\).
+    This shows that \(\tilde g\) is in fact the inverse of \(f\), and since
+    \(\tilde g\) is continuous, this shows \(f\) is a homeomorphism.
+    \begin{question}
+     Could we have just stopped after obtaining \(f\) and have showed that \(f\)
+     is an open map directly? ie, how necessarily fiddly would that be?
+    \end{question}
+   \item
+    The conceit of this part of the question is to write both the sphere and the
+    torus as the parametrisations we have on the square \(Q\), and then
+    establish that the ``composite'' equivalence relations after quotienting out
+    the subsets \(A\) and \(B\) are the same (or give obviously homeomorphic
+    spaces). The algebra is again given in the appendix.
+    % or is it dummy
+  \end{enumerate}
+ \item
+  \begin{enumerate}[label=(\alph*)]
+   \item \label{q12a}
+    Let \(W \subset X \times Y\) be open. It suffices to prove that
+    \(\pi_X(W)\) is open in \(X\). So suppose \(x \in \pi_X(W)\). Then there is
+    some \(y \in Y\) such that \((x, y) \in W\). Since \(W\) is open, we can
+    pick open \(U, V\) such that \(x \in U \times V \subset W\). Then
+    \(x \in U \subset \pi_X(W)\), so \(\pi_X(W)\) is indeed open.
+
+    Now suppose \(Y\) is compact, \(F \subset X \times Y\) is closed, and let
+    \(x \notin \pi_X(F)\). For each \(y \in Y\), choose open sets \(U_y\) and
+    \(V_y\) such that \(x \subset U_y \times V_y \subset F^C\), by closure of
+    \(F\).
+
+    Then \(\mathcal V = \set{V_y : y \in Y}\) is an open cover of \(Y\). So by
+    compactness, we can take a finite subcover
+    \(\mathcal W = \set{V_{y_1}, \dotsc, V_{y_n}}\). Let
+    \(U = \Intersect_{i = 1}^n U_{y_i}\). It is clear that \(x \in U\), and that
+    \(U \subset X\) is open.
+
+    Furthermore, if \(x' \in \pi_X(F)\), then there is some \(y' \in Y\) such
+    that \((x', y') \in F\). Then \(y' \in V_{y_i}\) for some \(i\), as
+    \(\mathcal W\) covers \(Y\). Since \((x', y') \in F\) and
+    \(U_{y_i} \times V_{y_i} \subset F^C\), we have \(x' \notin U_{y_i}\), so
+    \(x' \notin U\). This shows \(U \subset F^C\) and that therefore \(F\) is
+    closed.
+
+    Let \(f: \R^2 \to \R\) be given by \(f(x, y) = xy\), and let
+    \(F = f^{-1}\set 1\) (the graph of \(y = 1/x\), if you will). Since \(f\) is
+    continuous, \(F\) is closed. However,
+    \(\pi_X(F) = \pi_Y(F) = \R \setminus \set 0\) is not closed.
+   \item
+    Suppose \(f: X \to Y\) is continuous, \(Y\) is Hausdorff, and \(\Gamma\) is
+    closed in \(X \times Y\). Suppose \((x, y) \notin \Gamma\). Then
+    \(y \ne f(x)\), so by Hausdorffness, we can choose disjoint open
+    \(U, V \subset Y\) such that \(f(x) \in U\) and \(y \in V\). Then
+    \(f^{-1}(U)\) is open and \((x, y) \in f^{-1}(U) \times V\). Note that if
+    \((x', y') \in \Gamma\) (ie, \(y' = f(x')\)), then we cannot have
+    \((x', y') \in f^{-1}(U) \times V\). If we did, then
+    we would have \(x' \in f^{-1}(U)\) and \(y' \in V\). But then
+    \(f(x') \in U\), so \(y' \in U \intersect V\), contradicting disjointness.
+
+    So \((x, y) \in f^{-1}(U) \times V \subseteq \Gamma^C\), which proves
+    \(\Gamma\) is closed.
+
+    Now conversely suppose \(\Gamma\) is closed and \(Y\) is compact. Let
+    \(V \subset Y\) be closed. Then \(\pi_Y^{-1}(V) \intersect \Gamma\) is
+    closed, so by \ref{q12a}, we have that
+    \(\pi_X(\pi_Y^{-1}(V) \intersect \Gamma)\) is closed. Now we claim that this
+    set is precisely \(f^{-1}(V)\). It follows that \(f\) is continuous.
+
+    For the last fact, firstly suppose that \(x \in f^{-1}(V)\).
+    Then \(f(x) \in V\), so \((x, f(x)) \in \Gamma\), and
+    \((x, f(x)) \in \pi_Y^{-1}(V)\), so
+    \((x, f(x)) \in \pi_Y^{-1}(V) \intersect \Gamma\). So
+    \(x \in \pi_X(\pi_Y^{-1}(V) \intersect \Gamma)\).
+
+    Conversely, if \(x \in \pi_X(\pi_Y^{-1}(V) \intersect \Gamma)\), there
+    is a \(y \in Y\) such that
+    \((x, y) \in \pi_Y^{-1}(V) \intersect \Gamma\). Since \((x, y) \in \Gamma\),
+    we have \(y = f(x)\). But also, since \((x, y) \in \pi_Y^{-1}(V)\), we have
+    \(y \in V\). So \(f(x) \in V\), so \(x \in f^{-1}(V)\).
+    \begin{remark}
+     The author recommends drawing a picture of what's going on with the
+     constructions in both parts, with a not-too-pathological, preferably
+     monotone, continuous function on \(\R\).
+    \end{remark}
+  \end{enumerate}
+ \item
+  \begin{enumerate}[label=(\alph*)]
+   \item
+    \textit{Existence}. Define \(g: M \to \R\) by \(g(x) = d(x, f(x))\). \(g\)
+    is continuous, since \(d: M \times M \to \R\) is continuous (for example,
+    check that \(d: M \oplus_1 M \to \R\) is \(1\)-Lipschitz).
+
+    Since \(M \ne \emptyset\), we know that \(g\) must have a lower bound, and
+    attain it. Say \(k = \inf_M g\) and \(g(x) = d(x, f(x)) = k\). Certainly
+    \(k \ge 0\), as \(g\) is positive. If \(k > 0\), then \(x \ne f(x)\), so
+    \(d(f(x), f(f(x))) < d(x, f(x)) = k\), so in fact \(g(f(x)) < k\), so \(k\)
+    was not minimal.
+
+    Therefore \(k = 0\), so \(x = f(x)\) and we have a fixed point.
+
+    \textit{Uniqueness}. Suppose \(x \ne y\) are fixed points. Then
+    \(d(x, y) = d(f(x), f(y)) < d(x, y)\), which is a contradiction.
+   \item
+    Fix \(y \in M\). Define \(g: M \to \R\) by \(g(x) = d(f(x), y)\). Clearly
+    \(g\) is continuous, and it attains its infimum once more. Say
+    \(k = \inf_M g\) and \(g(x) = k\). If \(k = 0\), then \(f(x) = y\), which
+    proves that \(f\) is surjective. So suppose \(k > 0\).
+
+    Write \(f^n\) for the \(n\)-fold composite of \(f\) (so \(f^1 = f\) and
+    \(f^{n + 1} = f \compose f^n\) (also take \(f^0 = \Id\))). Now since \(k\)
+    is the infimum of \(g\), we know \(g(f^n(y)) \ge k\) for all \(n \ge 0\), so
+    \(d(f^n(y), y) \ge k\) for all \(n \in \N\). Applying isometry \(m\)
+    times yields \(d(f^{n + m}(y), f^m(y)) \ge k\) for any \(m, n \in \N\) - ie,
+    for any \(m', n' \in \N\), if \(m' \ne n'\), then
+    \(d(f^{m'}(y), f^{n'}(y)) \ge k\).
+
+    Particularly, this shows that the sequence \((f^n(y))\) in \(M\) has no
+    Cauchy subsequence, so certainly no convergent subsequence. So \(M\) is not
+    sequentially compact, which is a contradiction.
+  \end{enumerate}
+ \item
+  \begin{enumerate}[label=(\alph*)]
+   \item
+    Let \(X\) be compact Hausdorff, and \(A, B \subset X\) be closed. Note that
+    \(A\) and \(B\) must both be compact, since they are closed in \(X\).
+
+    For all
+    \(a \in A\) and \(b \in B\), choose open sets \(U_{ab}, V_{ab} \subset X\)
+    separating \(a\) and \(b\), by Hausdorffness
+    (ie, such that \(a \in U_{ab}\) and \(b \in V_{ab}\) and
+    \(U \intersect V = \emptyset\)).
+
+    By construction, for any fixed \(a \in A\),
+    \(\mathcal V_a = \set{V_{ab} : b \in B}\) is an open cover of \(B\).
+    So take a finite subcover
+    \(\mathcal V_a' = \set{V_{ab_1}, \dotsc, V_{ab_n}}\).
+    Let \(U_a = \Intersect_{i = 1}^n U_{ab_i}\) and let
+    \(V_a = \Union_{i = 1}^n V_{ab_i}\). Then both \(U_a\) and
+    \(V_a\) are open, and we have \(a \in U_a\), and
+    \(B \subset V_a\). Note also that \(U_a \intersect V_a = \emptyset\), since
+    \(V_{ab_i} \intersect U_a = \emptyset\) for all \(i\).
+
+    Now, letting \(a\) vary, observe that \(\mathcal U = \set{U_a : a \in A}\)
+    is an open cover of \(A\). Take a finite subcover
+    \(\mathcal U' = \set{U_{a_1}, \dotsc, U_{a_k}}\).
+    Let \(U = \Union_{i = 1}^k U_{a_i}\) and let
+    \(V = \Intersect_{i = 1}^k V_{a_i}\).
+    Now we have that \(U\) and \(V\) are both open, and \(A \subset U\),
+    and \(B \subset V\), and since \(U_{a_i} \intersect V = \emptyset\) for all
+    \(a\), we have \(U \intersect V = \emptyset\).
+
+    So \(X\) is normal.
+    \begin{remark}
+     Really what happened here is we built up the amount of separation we could
+     get. The first step was to separate a point from any arbitrary closed set,
+     after which we could basically think of \(B\) as a point, and just do the
+     same thing for \(A\).
+
+     The real hypothesis we needed was that \(A\) and \(B\) are compact. In some
+     sense this shows that compact sets behave a bit like points inside a
+     Hausdorff space, another example of which is the fact that compact subsets
+     of Hausdorff spaces are closed.
+    \end{remark}
+   \item
+    We will be thinking of the ambient space as \(C_1\), which is Hausdorff and
+    compact. Define \(C = \Intersect_{n = 1}^\infty C_n\), and note that \(C\)
+    is closed, as an intersection of closed sets (each \(C_n\) is closed, as a
+    compact set in a Hausdorff space).
+
+    So suppose \(C\) is disconnected by sets \(A\) and \(B\):
+    \(C = A \union B\). Then both \(A\) and \(B\) are closed in \(C\), which is
+    a closed subset of \(C_1\). Therefore, \(A\) and \(B\) are both closed in
+    \(C_1\). So we can choose disjoint open sets \(U, V \subset C\) such that
+    \(A \subset U\) and \(B \subset V\).
+
+    Define \(X_n = C_n \setminus (U \union V)\). Then \(X_n\) is closed
+    in \(C_1\), and \((X_n)\) is a decreasing sequence of sets. Observe that
+    \(\Intersect_{n = 1}^\infty X_n
+      = \Intersect_{n = 1}^\infty C_n \setminus (U \union V)
+      = C \setminus (U \union V) = \emptyset\), so taking complements,
+    \(\Union_{n = 1}^\infty C_1 \setminus X_n = C_1\), ie we have
+    \(\mathcal U = \set{C_1 \setminus X_n : n \in \N}\) being an open cover of
+    \(C_1\). Take a finite subcover
+    \(\mathcal V = \set{C_1 \setminus X_{m_1}, \dotsc, C_1 \setminus X_{m_k}}\),
+    so that we have \(\Union_{n = 1}^k C_1 \setminus X_{m_n} = C_1\). Taking
+    complements again, \(\Intersect_{n = 1}^k X_{m_n} = \emptyset\). But since
+    \((X_n)\) is decreasing, if we set \(M = \max_{1 \le n \le k} m_n\), we know
+    \(\Intersect_{n = 1}^k X_{m_n} = X_M = \emptyset\). So
+    \(C_M \setminus (U \union V) = \emptyset\), ie
+    \(C_M \subset (U \union V)\). But then
+    \(U \intersect C_M\) and \(V \intersect C_M\) disconnect \(C_M\), since
+    neither of these can be empty, because \(A \subset U \intersect C_M\) and
+    \(B \subset V \intersect C_M\).
+    This contradicts connectedness of \(C_M\).
+    \begin{remark}
+     The slightly weird step of taking complements here was really motivated by
+     an equivalent condition to compactness, which is the \emph{finite
+     intersection property}. This says that whenever there is a collection of
+     closed sets in \(X\) whose intersection is empty, there must be some finite
+     subset of those closed sets whose intersection is still empty. The author
+     met this fact on one of Gareth's Met \& Top sheets. The proof is
+     essentially what happens in the above proof before we appeal to
+     compactness.
+    \end{remark}
+    For our counterexample, let
+    \(C_n = \R^2 \setminus [\intoo{-1, 1}  \times \intoo{-\infty, n}]\). Then we
+    have the the intersection is
+    \(\Intersect_{n = 1}^\infty C_n
+      = \R^2 \setminus [\intoo{-1, 1} \times \R]
+      = [\intoc{-\infty, -1} \times \R] \times [\intco{1, \infty} \times \R]\),
+    which is clearly disconnected.
+  \end{enumerate}
+ \item
+  For separability, first define the set \(A_n \subset C\intcc{0, 1}\) to be
+  \emph{ the set of continuous functions \(f\) on \(\intcc{0, 1}\) such that
+  \(f\) is piecewise linear on \(\intcc{\tfrac in, \tfrac {i + 1}n}\) for each
+   \(0 \le i < n\), \textbf{and} \(f(\tfrac in) \in \Q\) for each
+   \(0 \le i \le n\)
+  }.
+  In symbols,
+  % PLS DONT MAKE FUN OF WEIRD INDENT
+  \begin{numcases}{f \in A_n \iff}
+   f(\tfrac in) \in \Q & \(\Forall 0 \le i \le n\) \label{A_n_Q} \\
+   f(\tfrac{i + t}n) = (1 - t)f(\tfrac in) + tf(\tfrac{i + 1}n)
+    & \(\Forall 0 \le i < n, \Forall t \in \intcc{0, 1}\) \label{A_n_linear}
+  \end{numcases}
+  Clearly each \(A_n\) is countable, since we can inject it into the countable
+  set \(\Q^{n + 1}\) via
+  \begin{align*}
+   \theta_n: A_n &\to \Q^{n + 1} \\
+   f &\mapsto (f(0), f(\tfrac 1n), \dotsc, f(1 - \tfrac 1n), f(1))
+  \end{align*}
+  This is well-defined by (\ref{A_n_Q}), and an injection\footnote{%
+   Functional intensionalists turn back now!
+  }, since (\ref{A_n_linear}) allows us to recover \(f(x)\) for each
+  \(x \in \intcc{0, 1}\) from \(\theta_n(f)\).
+
+  It follows that \(A = \Union_{n = 1}^\infty A_n\) is also countable, as a
+  countable union of countable sets. It only remains to show that \(A\) is dense
+  in \(C\intcc{0, 1}\). To prove this, it suffices to show that every non-empty
+  open \(C\intcc{0, 1}\)-ball intersects \(A\). So let \(f \in C\intcc{0, 1}\)
+  and \(r > 0\) be arbitrary.
+
+  Since \(\intcc{0, 1}\) is compact, \(f\) is uniformly continuous, so choose a
+  \(\delta > 0\) such that whenever \(\abs{x - y} < \delta\), we have
+  \(\abs{f(x) - f(y)} < \tfrac 1{10} r\). Choose an \(n \in \N\) with
+  \(n > 1/\delta\). For each \(i = 0, \dotsc, n\), choose a rational
+  \(q_i \in
+    \intoo{f(\tfrac in) - \tfrac 1{10} r, f(\tfrac in) + \tfrac 1{10}r}
+    \cap \Q\), using density of \(\Q\).
+  Let \(g = \theta_n^{-1}(q_0, \dotsc, q_n)\).
+  Now suppose \(x \in \intcc{0, 1}\) is arbitrary. Pick an
+  \(i \in \set{0, \dotsc n - 1}\) and a \(t \in \intcc{0, 1}\) such that
+  \(x = \tfrac{i + t}n\). Then
+  \begin{align*}
+   \abs{g(x) - f(x)}
+    &= \abs{g(\tfrac{i + t}n) - f(\tfrac{i + t}n)} \\
+    &= \abs{(1 - t)g(\tfrac in) + tg(\tfrac{i + 1}n) - f(\tfrac{i + t}n)} \\
+    &= \abs{(1 - t)q_i + tq_{i + 1} - f(\tfrac{i + t}n)} \\
+    &\le \abs{q_i - f(\tfrac{i + t}n)}
+      + t\abs{\dots}
+  \end{align*}
+\end{enumerate}
+
+\section*{Appendix}
+
+% \includepdf[pages=10-12]{izaakvd_AT_3_orig.pdf}
+% \includepdf[pages=15-17]{izaakvd_AT_3_orig.pdf}
+
+\end{document}
