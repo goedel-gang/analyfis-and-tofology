@@ -648,13 +648,12 @@
    \(0 \le i < n\), \textbf{and} \(f(\tfrac in) \in \Q\) for each
    \(0 \le i \le n\)
   }.
-  In symbols,
-  % PLS DONT MAKE FUN OF WEIRD INDENT
-  \begin{numcases}{f \in A_n \iff}
-   f(\tfrac in) \in \Q & \(\Forall 0 \le i \le n\) \label{A_n_Q} \\
-   f(\tfrac{i + t}n) = (1 - t)f(\tfrac in) + tf(\tfrac{i + 1}n)
-    & \(\Forall 0 \le i < n, \Forall t \in \intcc{0, 1}\) \label{A_n_linear}
-  \end{numcases}
+  In symbols, \(f \in A_n\) if and only if
+  \begin{align}
+   f(\tfrac in) &\in \Q && \Forall 0 \le i \le n \label{A_n_Q} \\
+   f(\tfrac{i + t}n) &= (1 - t)f(\tfrac in) + tf(\tfrac{i + 1}n)
+    && \Forall 0 \le i < n, \Forall t \in \intcc{0, 1} \label{A_n_linear}
+  \end{align}
   Clearly each \(A_n\) is countable, since we can inject it into the countable
   set \(\Q^{n + 1}\) via
   \begin{align*}
@@ -689,8 +688,41 @@
     &= \abs{(1 - t)g(\tfrac in) + tg(\tfrac{i + 1}n) - f(\tfrac{i + t}n)} \\
     &= \abs{(1 - t)q_i + tq_{i + 1} - f(\tfrac{i + t}n)} \\
     &\le \abs{q_i - f(\tfrac{i + t}n)}
-      + t\abs{\dots}
+      + t\abs{q_{i + 1} - q_i} \\
+    &\le \abs{q_i - f(\tfrac in)} + \abs{f(\tfrac in) - f(\tfrac{i + t}n)}
+      + \abs{q_{i + 1} - q_i} \\
+    &\le \tfrac 15 r
+      + \abs{q_{i + 1} - q_i} \\
+    &\le \tfrac 15 r
+      + \abs{q_{i + 1} - f(\tfrac{i + 1}n)}
+      + \abs{f(\tfrac{i + 1}n) - f(\tfrac in)}
+      + \abs{f(\tfrac in) - q_i} \\
+    &\le \tfrac 15 r + \tfrac 3{10} r \le \tfrac 12 r
   \end{align*}
+  and it follows that \(d_\infty(f, g) \le \tfrac 12 r < r\).
+
+  So indeed \(g \in D_r(f) \intersect A\), and \(A\) must be dense.
+
+  \(B\) is clearly closed, since it is a closed ball with respect to the
+  uniform metric.
+
+  To show that \(B\) is not compact, it suffices to show that \(B\) is not
+  sequentially compact. Define
+  \begin{equation*}
+   f_n(x) =
+   \begin{cases*}
+    0 & if \(0 \le x \le \tfrac 1{n + 1}\) \\
+    1 & if \(x = \tfrac 12(\tfrac 1n + \tfrac 1{n + 1})\) \\
+    0 & if \(\tfrac 1n \le x \le 1\) \\
+    \text{piecewise linear}
+     & on \(\intco{\tfrac 1{n + 1}, \tfrac 12(\tfrac 1{n + 1} + \tfrac 1n)}\)
+       and \(\intoc{\tfrac 12(\tfrac 1{n + 1} + \tfrac 1n), \tfrac 1n}\)
+   \end{cases*}
+  \end{equation*}
+  Then \(d_\infty(f_n, f_m) = \delta_{nm}\), so in fact the sequence
+  \((f_n)\) has no uniformy Cauchy subsequence, and certainly no uniformly
+  convergent subsequence.
+  % left as exercise
 \end{enumerate}
 
 \section*{Appendix}
