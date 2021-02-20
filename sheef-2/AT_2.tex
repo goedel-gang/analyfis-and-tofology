@@ -19,6 +19,68 @@
 
 \begin{enumerate}[label=\arabic*.,leftmargin=*]
  \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+ \item
+  We work in a complete metric space \((M, d)\).
+
+  Since each of the \(A_n\) is non-empty, and assming we are working in strong
+  enough axiomatic foundations, for each \(n\) we can choose an arbitrary
+  \(a_n \in A_n\). I claim that \((a_n)\) is Cauchy and
+  \(\displaystyle a_n \to a \in \bigcap_{i \in \N}A_i\), so the
+  intersection is indeed non-empty.
+
+  Given \(\varepsilon > 0\), since \(\operatorname{diam}(A_n) \to 0\), we have
+  some \(N \in \N\) such that for all \(n \geq N\) and \(x, y \in A_n\) we have
+  \(d(x, y) \leq \varepsilon\). So given
+  \(m, n \in \N\) with \(m, n \geq N\), we have
+  \(a_m, a_n \in A_m, A_n \subseteq A_N\) so
+  \(d(a_m, a_n) \leq \varepsilon\). Hence \((a_n)\) is Cauchy.
+
+  By the completeness of the metric space we are working in, it must converge,
+  say to \(a\). To show this lies in the intersection, it remains to show that
+  given
+  some \(n \in \N\), \(a \in A_n\). Consider the sequence \(b_i = a_{n + i - 1}\).
+  This converges to \(a\) as well, but since it consists of values \(a_m\) with
+  \(m \geq n\), all of its points are contained in \(A_n\). This means \((b_i)\)
+  is a convergent sequence in the closed set \(A_n\), so its limit point \(a\)
+  must be in \(A_n\). So we have \(\forall\ n \in \N, a \in A_n\) which is
+  equivalent to \(\displaystyle a \in \bigcap_{i \in \N}A_i\). So the
+  intersection is non-empty.
+
+  I will prove that a nested sequence of closed balls in a complete metric space
+  has non-empty intersection. Suppose we have our sequence
+  \(B_{r_1}(a_1) \supseteq B_{r_2}(a_2) \subseteq \cdots\), where we have the
+  sequence \((a_n)\) in \(M\) of centres of the balls and a sequence \((r_n)\) in
+  \(\R_{>0}\) of their radii. Since \((r_n)\) is decreasing and bounded below,
+  it must converge, say to \(r\). I will prove that \((a_n)\) converges to a
+  point in the intersection of all of the balls, by first proving the sequence
+  is Cauchy (and then the same argument as above holds).
+
+  Given \(\varepsilon > 0\), since \((r_n)\) convergent in \(\R\) is is also
+  Cauchy, so there exists \(N \in \N\) such that for all \(m > n \geq N\) we have
+  \(r_m - r_n \leq \varepsilon\).
+  Since the balls are nested, we must have for all \(i\)
+  \[d(a_i, a_{i+1}) \leq r_i - r_{i+1}\]
+  and given \(m, n \geq N\) we can sum this inequality for \(i = m\) up to \(i = n\):
+  \[\sum_{i=m}^n d(a_i, a_{i+1}) \leq \sum_{i=m}^n (r_i - r_{i+1})\]
+  applying the triangle inequality on the LHS and observing that the RHS is a
+  telescoping sum, we have
+  \[d(a_m, a_n) \leq \sum_{i=m}^n d(a_i, a_{i+1}) \leq r_m - r_n \leq \varepsilon\]
+  and so \((a_n)\) is Cauchy and hence its limit point is a point in the
+  intersection of the balls, which is therefore non-empty.
+
 \end{enumerate}
 
 \end{document}
+
